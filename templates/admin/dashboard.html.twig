@@ -16,6 +16,14 @@
         <div class="col-md-6">
             <div class="card text-white bg-primary mb-3">
                 <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-chart-bar"></i> Statistiques</h5>
+                    <p class="card-text">Nombre total d'artcles : {{ totalArticles }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-chart-line"></i> Graphique à Barres</h5>
                     <canvas id="myBarChart"></canvas>
                 </div>
@@ -39,8 +47,8 @@
                 datasets: [{
                     label: 'Données de l\'exemple',
                     data: chartData.data,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)', // Couleur de fond
+                    borderColor: 'rgba(54, 162, 235, 1)', // Couleur de la bordure
                     borderWidth: 1
                 }]
             },
