@@ -1,0 +1,128 @@
+<header style=" margin-bottom: 70px;" id="app_header">
+	<style>
+		#test:hover {
+			color: green;
+		}
+		#app_nav li.nav-item:hover {
+			font-weight: bold;
+			background-color: #CCC;
+			color: #fff;
+
+			border-radius: 25px;
+
+		}
+		#app_nav li.nav-item a.active {
+			font-weight: bold;
+		}
+		#connecter {
+
+			color: blue;
+			font-weight: bold;
+			border-radius: 20px;
+		}
+		#inscrire {
+			color: green;
+			border-radius: 20px;
+			font-weight: bold;
+		}
+
+		#connecter:hover {
+			background-color: blue;
+			color: white;
+		}
+		#inscrire:hover {
+			background-color: green;
+			color: white;
+		}
+		#app-btn-profile {
+			color: black;
+			border: 0;
+			background-color: transparent;
+		}
+		#app-btn-profile img {
+			width: 30px;
+			height: 30px;
+			border-radius: 50%;
+		}
+	</style>
+
+	<nav class="navbar navbar-light bg-light fixed-top  navbar-expand-lg  pt-3" style="border:red">
+		<div class="container-fluid">
+
+			<a class="navbar-brand" href="{{ path('app_home') }}" id="test">HK'S BLOG</a>
+
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+
+			<div class="collapse navbar-collapse" id="navbarsExample03">
+				<ul class="navbar-nav me-auto mb-2 mb-sm-0" id="app_nav">
+					<li class="nav-item">
+						<a class="nav-link {{home_page | default('') }}" href="{{ path('app_home') }}">Accueil</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {{article_page | default('') }}" href="{{path('app_articles')}}">Articles</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {{category_page | default('') }}" href="{{path('app_category')}}">Catégories</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {{about_page | default('') }}" href="{{path('app_about')}}">À Propos</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {{contact_page | default('') }}" href="{{path('app_contact')}}">Contact</a>
+					</li>
+					{% if is_granted('ROLE_ADMIN') %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('admin') }}">Administration</a>
+						</li>
+					{% endif %}
+
+				</ul>
+				<div>
+
+					{# Si un utilisateur est connecté en tant qu'utilisateur normal #}
+					{% if is_granted('ROLE_USER') %}
+						<div class="dropdown">
+
+							<button id="app-btn-profile" class="dropdown-toggle  me-5" style=" width:150px" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+								<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Nao_Robot_%28Robocup_2016%29.jpg/800px-Nao_Robot_%28Robocup_2016%29.jpg" alt="Profile" class="rounded-circle">
+								{{ app.user.getfullname }}
+							</button>
+							<ul class="dropdown-menu" aria-labelledby="userDropdown">
+								<li>
+
+									<a class="dropdown-item" href="{{ path('app_profile') }}">Profile</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="{{ path('app_logout') }}">Se déconnecter</a>
+								</li>
+							</ul>
+						</div>
+
+
+					{% else %}
+						<ul class="navbar-nav mb-2 mb-sm-0">
+							<li class="nav-item">
+								<a href="{{ path('app_register') }}" class="nav-link" id="inscrire">S'inscrire</a>
+							</li>
+							<li class="nav-item ">
+								<a href="{{ path('app_login') }}" class="nav-link" id="connecter">Se connecter</a>
+							</li>
+						</ul>
+					{% endif %}
+
+					{#
+																																																																																																																																																																																																																																																																																																																																																																																										<ul class="navbar-nav  mb-2 mb-sm-0">
+																																																																																																																																																																																																																																																																																																																																																																																											<li>
+																																																																																																																																																																																																																																																																																																																																																																																												<a href={{ path('app_register') }} class="btn btn-outline-primary">S'inscrire</a>
+																																																																																																																																																																																																																																																																																																																																																																																												<a href={{ path('app_login') }} class="btn btn-outline-success" >Se connecter</a>
+																																																																																																																																																																																																																																																																																																																																																																																											</li>
+																																																																																																																																																																																																																																																																																																																																																																																										</ul> #}
+				</div>
+
+			</div>
+		</div>
+	</nav>
+</header>

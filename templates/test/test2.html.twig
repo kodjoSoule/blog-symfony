@@ -1,0 +1,130 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CardsController!{% endblock %}
+
+{# {% block header %}
+    {% include 'partials/header.html.twig' with {'cards':'active'} %}
+{% endblock %} #}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row py-4">
+        <div class="col py-4 bg-success">
+            <h1 class="text-center" data-aos="fade-up">Tous les articles<p1>
+        </div>
+    </div>
+</div>
+    <div class="container">
+        <section class="section">
+            <div class="row">
+
+                <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                    <h5 class="card-title">Line Chart</h5>
+                    <!-- Line Chart -->
+                    {{ render_chart(chart) }}
+                    <canvas id="lineChart" style="max-height: 400px;"></canvas>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", () => {
+                        new Chart(document.querySelector('#lineChart'), {
+                            type: 'line',
+                            data: {
+                            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                            datasets: [{
+                                label: 'Line Chart',
+                                data: [65, 59, 80, 81, 56, 55, 40],
+                                fill: false,
+                                borderColor: 'rgb(75, 192, 192)',
+                                tension: 0.1
+                            }]
+                            },
+                            options: {
+                            scales: {
+                                y: {
+                                beginAtZero: true
+                                }
+                            }
+                            }
+                        });
+                        });
+                    </script>
+                    <!-- End Line CHart -->
+
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                    <h5 class="card-title">Bar CHart</h5>
+
+                    <!-- Bar Chart -->
+                    <canvas id="barChart" style="max-height: 400px;"></canvas>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", () => {
+                        new Chart(document.querySelector('#barChart'), {
+                            type: 'bar',
+                            data: {
+                            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                            datasets: [{
+                                label: 'Bar Chart',
+                                data: [65, 59, 80, 81, 56, 55, 40],
+                                backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(255, 159, 64, 0.2)',
+                                'rgba(255, 205, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(201, 203, 207, 0.2)'
+                                ],
+                                borderColor: [
+                                'rgb(255, 99, 132)',
+                                'rgb(255, 159, 64)',
+                                'rgb(255, 205, 86)',
+                                'rgb(75, 192, 192)',
+                                'rgb(54, 162, 235)',
+                                'rgb(153, 102, 255)',
+                                'rgb(201, 203, 207)'
+                                ],
+                                borderWidth: 1
+                            }]
+                            },
+                            options: {
+                            scales: {
+                                y: {
+                                beginAtZero: true
+                                }
+                            }
+                            }
+                        });
+                        });
+                    </script>
+                    <!-- End Bar CHart -->
+
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <h1 class="my-4" id="test">Liste de cartes</h1>
+        {% for i in 1..20 %}
+            <div class="row" data-aos="{{ cycle(['fade-right', 'fade-left'], loop.index) }}">
+                {% for j in 1..4 %}
+                    <div class="col-md-3" data-aos="{{ cycle(['fade-up', 'fade-down'], loop.index) }}">
+                        <div class="card mb-4">
+                            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Image de la carte">
+                            <div class="card-body">
+                                <h5 class="card-title">Carte {{ i }}</h5>
+                                <p class="card-text">Description de la carte {{ i }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

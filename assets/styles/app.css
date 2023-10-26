@@ -1,0 +1,11 @@
+/* assets/app.css (ou votre fichier principal CSS/SCSS) */
+body {
+    background-color: lightgray;
+}
+.profile .profile-card img{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+
+}
+

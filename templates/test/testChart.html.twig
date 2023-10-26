@@ -1,0 +1,131 @@
+{% extends 'base.html.twig' %}
+{# {% block header %}
+    {% include 'partials/header.html.twig' with {'cards':'active'} %}
+{% endblock %} #}
+
+{% block body %}
+<script></script>
+<div class="container">
+	<section class="section">
+		<div class="row">
+			<div class="col-6 mb-2">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Line Chart- HK
+						</h5>
+						<!-- Line Chart -->
+						<canvas id="myChart" style="max-height: 400px;"></canvas>
+
+					</div>
+
+				</div>
+			</div>
+
+			{# Templates #}
+			<div class="col-6 mb-2">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Line Chart</h5>
+						<!-- Line Chart -->
+						<canvas id="lineChart" style="max-height: 400px;"></canvas>
+
+					</div>
+
+				</div>
+			</div>
+
+
+			<div class="col-6 mb-2">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Bar CHart</h5>
+						<!-- Bar Chart -->
+						<canvas id="barChart" style="max-height: 400px;"></canvas>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-6 mb-2">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Pie Chart</h5>
+
+
+						<canvas id="pieChart" style="max-height: 400px;"></canvas>
+
+
+					</div>
+				</div>
+			</div>
+
+			<div class="col-6 mb-2">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Doughnut Chart</h5>
+
+
+						<canvas id="doughnutChart" style="max-height: 400px;"></canvas>
+
+
+					</div>
+				</div>
+			</div>
+
+			<div class="col-6 mb-2">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Radar Chart</h5>
+
+
+						<canvas id="radarChart" style="max-height: 400px;"></canvas>
+
+
+					</div>
+				</div>
+			</div>
+
+			<div class="col-6 mb-2">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Polar Area Chart</h5>
+
+
+						<canvas id="polarAreaChart" style="max-height: 400px;"></canvas>
+
+
+					</div>
+				</div>
+			</div>
+
+			<div class="col-6 mb-2">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Stacked Bar Chart</h5>
+
+
+						<canvas id="stakedBarChart" style="max-height: 400px;"></canvas>
+
+
+					</div>
+				</div>
+			</div>
+
+			<div class="col-6 mb-2">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Bubble Chart</h5>
+
+
+						<canvas id="bubbleChart" style="max-height: 400px;"></canvas>
+
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</section>
+</div>
+<script>
+
+	{% endblock %}

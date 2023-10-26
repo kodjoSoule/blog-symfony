@@ -1,24 +1,79 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
-
-{% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
-
-    <h1>Register</h1>
-
-    {{ form_errors(registrationForm) }}
-
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn btn-primary">Register</button>
-    {{ form_end(registrationForm) }}
+{% block title %}Incription
 {% endblock %}
+{% block header %}
+	<header>
+		<nav class="navbar navbar-expand-sm navbar-dark bg-primary pt-3" aria-label="Troisième exemple de navbar">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="{{ path('app_home') }}">HK'S BLOG</a>
+
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarsExample03">
+					<ul class="navbar-nav me-auto mb-2 mb-sm-0">
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_home') }}">Accueil</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Articles</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Catégories</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">À Propos</a>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Menu</a>
+							<ul class="dropdown-menu" aria-labelledby="dropdown03">
+								<li>
+									<a class="dropdown-item" href="#">Action</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="#">Autre action</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="#">Quelque chose d'autre</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+{% endblock %}
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div class="col-8 mx-auto">
+				{% for flash_error in app.flashes('verify_email_error') %}
+					<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+				{% endfor %}
+
+				<h1>Incription</h1>
+
+				{{ form_errors(registrationForm) }}
+				{{ form_start(registrationForm) }}
+				<div class="row">
+					<div class="col">
+						{{ form_row(registrationForm.firstname, {label: 'Prenom'}) }}
+					</div>
+					<div class="col">
+						{{ form_row(registrationForm.lastname, {label: 'Nom'} ) }}
+					</div>
+
+					{{ form_row(registrationForm.username, {label: 'Nom utilisateur'}) }}
+					{{ form_row(registrationForm.email, {label: 'Email'}) }}
+					{{ form_row(registrationForm.plainPassword, {label: 'Mot de passe'}) }}
+					{{ form_row(registrationForm.agreeTerms) }}
+					<button type="submit" class="btn btn-primary">Inscription</button>
+					{{ form_end(registrationForm) }}
+				</div>
+			</div>
+		</div>
+	{% endblock %}
+	{% block footer %}{% endblock %}

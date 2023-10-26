@@ -1,24 +1,54 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {% block stylesheets %}
-        <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
-        {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}
+				BLOG
+			{% endblock %}
+		</title>
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'><text y='1.2em' font-size='96'>⚫️</text></svg>">{# <link
+																																																																rel="stylesheet" href="{{ asset('../vendor/twbs/bootstrap-icons/font/bootstrap-icons.css') }}"> #}
 
-        {% block javascripts %}
-        <script src= "{{asset('assets/js/bootstrap.min.js')}}"></script>
-        {% endblock %}
-    </head>
-    <body>
-        <div class="container">
-            <div class="row">
-                <div classe="col">
-                    {% block body %}{% endblock %}
-                </div>
-            </div>
-        </div>
-    </body>
+
+		{# <!-- Google Fonts -->
+																																								<link href="https://fonts.gstatic.com" rel="preconnect"> <link
+																																								href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet"> #}
+		{# Cart js #}<script src="https://cdn.jsdelivr.net/npm/chart.js"> </script>
+
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+			<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+			<link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+			<link rel="stylesheet" href="{{ asset('build/app.css') }}">
+
+
+		{% endblock %}
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+			<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+			<script src="vendor/tinymce/tinymce/tinymce.min.js"></script>
+			<script>
+				tinymce.init({selector: '#tinymce'});
+			</script>
+		{% endblock %}
+
+	</head>
+	<body class="bg-muted">
+		{% block header %}
+			{% include 'partials/header.html.twig' with {'home': 'active'}  %}
+
+		{% endblock %}
+		{% block body %}{% endblock %}
+		{% block footer %}
+			{% include 'partials/footer.html.twig' %}
+		{% endblock %}
+		{% block scripts %}
+			{# Incluez votre fichier JavaScript principal après les autres scripts JavaScript #}
+			<script src="{{ asset('build/app.js') }}"></script>
+			<!-- Inclure le fichier JavaScript de Chart.js -->
+			<script src="{{ asset('js/chart.js') }}"></script>
+
+		{% endblock %}
+	</body>
 </html>

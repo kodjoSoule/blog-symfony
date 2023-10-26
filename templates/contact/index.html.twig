@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Hello ContactController!
+
+
+{% endblock %}
+{% block header %}
+	{% include 'partials/header.html.twig' with {'contact':'active'} %}
+{% endblock %}
+{% block body %}
+	<div class="container">
+		<div class="row justify-content-center mt-5">
+			<div class="col-10">
+				<img class="img-fluid" data-aos="zoom-in" src="{{ asset('assets/images/banner.png') }}" alt="banner"/>
+				<p data-aos="fade-left" data-aos-delay="900" data-aos-duration="200">
+					<span class="text-info">
+						Merci de remplir le formulaire.
+					</span>
+					<a class="link" href="{{ path('app_home') }}">
+						Acceuil
+					</a>
+				</p>
+				<form class='form mt-2' method="post">
+					{{ form(contactForm) }}
+					</form>
+				</div>
+			</div>
+		</div>
+	{% endblock %}

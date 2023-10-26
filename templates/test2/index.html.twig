@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Test2 index
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row mb-5">
+			<div class="col">
+				<h1>Test2 index</h1>
+
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Name</th>
+							<th>Image</th>
+							<th>actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for test2 in test2s %}
+							<tr>
+								<td>{{ test2.id }}</td>
+								<td>{{ test2.name }}</td>
+								<td>
+
+
+									<img style="width: 100px;" src="{{ vich_uploader_asset(test2, 'imageFile') }}" alt="Product Image">
+
+								</td>
+
+
+								<td>
+									<a href="{{ path('app_test2_show', {'id': test2.id}) }}">show</a>
+									<a href="{{ path('app_test2_edit', {'id': test2.id}) }}">edit</a>
+								</td>
+							</tr>
+						{% else %}
+							<tr>
+								<td colspan="4">no records found</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+
+				<a href="{{ path('app_test2_new') }}">Create new</a>
+			</div>
+		</div>
+	</div>
+{% endblock %}

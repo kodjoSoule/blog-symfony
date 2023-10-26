@@ -3,62 +3,184 @@
 {% block body_id 'dashboard' %}
 
 {% block main %}
-    <h1>Bienvenue sur le Tableau de Bord</h1>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card text-white bg-primary mb-3">
-                <div class="card-body">
-                    <h5 class="card-title"><i class="fas fa-chart-bar"></i> Statistiques</h5>
-                    <p class="card-text">Nombre total d'utilisateurs : {{ totalUsers }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card text-white bg-primary mb-3">
-                <div class="card-body">
-                    <h5 class="card-title"><i class="fas fa-chart-bar"></i> Statistiques</h5>
-                    <p class="card-text">Nombre total d'artcles : {{ totalArticles }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card text-white bg-info mb-3">
-                <div class="card-body">
-                    <h5 class="card-title"><i class="fas fa-chart-line"></i> Graphique à Barres</h5>
-                    <canvas id="myBarChart"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-{% endblock %}
+	<script>
+		<script src="{{ asset('js/chart.js') }}"></script>
+	</script>
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item">
+				<a href="/">Home</a>
+			</li>
+			<li class="breadcrumb-item active" aria-current="page">dashboard</li>
+		</ol>
+	</nav>
+	<h1 class="mb-4">Bienvenue sur le Tableau de Bord</h1>
+	<div class="row">
+		<div class="col-md-6">
+			<a href="{{ path('admin') }}" class="card-link">
+				<div class="card text-white bg-primary mb-3">
+					<div class="card-body">
+						<h5 class="card-title">
+							<i class="fas fa-users"></i>
+							Utilisateurs</h5>
+						<p class="card-text">Nombre total d'utilisateurs :
+							{{ totalUsers }}</p>
+					</div>
+				</div>
+			</a>
+		</div>
 
-{% block javascripts %}
-    {{ parent() }}
-    <script>
-        // Récupérez les données du service Symfony
-        const chartData = {{ chartDataService.getChartData()|json_encode|raw }};
+		<div class="col-md-6">
+			<a href="{{ path('admin') }}" class="card-link">
+				<div class="card text-white bg-success mb-3">
+					<div class="card-body">
+						<h5 class="card-title">
+							<i class="fas fa-newspaper"></i>
+							Articles</h5>
+						<p class="card-text">Nombre total d'articles :
+							{{ totalArticles }}</p>
+					</div>
+				</div>
+			</a>
+		</div>
+		<div class="col-6 chart-container">
+			<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium recusandae necessitatibus quod doloremque? Aut, aspernatur quo. Dolores laudantium quae dicta odio incidunt. Maxime repellendus doloremque rerum officia praesentium eligendi fugiat.</p>
+		</div>
+		<div class="col-6 chart-container">
+			<canvas id="article-chart"></canvas>
+		</div>
+		<div class="col-md-12 mt-4">
+			<a href="{{ path('admin') }}" class="card-link">
+				<div class="card text-white bg-info mb-3">
+					<div class="card-body">
+						<h5 class="card-title">
+							<i class="fas fa-chart-bar"></i>
+							Graphique à Barres</h5>
+						<canvas id="myBarChart"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{# Chart JS #}
+	{# Chart JS #}
+	<section class="section">
+		<div class="row">
+			<div class="col-6 mb-2">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Line Chart- HK
+						</h5>
+						<!-- Line Chart -->
+						<canvas id="myChart" style="max-height: 400px;"></canvas>
 
-        // Créez le graphique à l'aide de la bibliothèque de graphiques (par exemple, Chart.js)
-        const ctx = document.getElementById('myBarChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: chartData.labels,
-                datasets: [{
-                    label: 'Données de l\'exemple',
-                    data: chartData.data,
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)', // Couleur de fond
-                    borderColor: 'rgba(54, 162, 235, 1)', // Couleur de la bordure
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script>
+					</div>
+
+				</div>
+			</div>
+
+			{# Templates #}
+			<div class="col-6 mb-2">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Line Chart</h5>
+						<!-- Line Chart -->
+						<canvas id="lineChart" style="max-height: 400px;"></canvas>
+
+					</div>
+
+				</div>
+			</div>
+
+
+			<div class="col-6 mb-2">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Bar CHart</h5>
+						<!-- Bar Chart -->
+						<canvas id="barChart" style="max-height: 400px;"></canvas>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-6 mb-2">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Pie Chart</h5>
+
+
+						<canvas id="pieChart" style="max-height: 400px;"></canvas>
+
+
+					</div>
+				</div>
+			</div>
+
+			<div class="col-6 mb-2">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Doughnut Chart</h5>
+
+
+						<canvas id="doughnutChart" style="max-height: 400px;"></canvas>
+
+
+					</div>
+				</div>
+			</div>
+
+			<div class="col-6 mb-2">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Radar Chart</h5>
+
+
+						<canvas id="radarChart" style="max-height: 400px;"></canvas>
+
+
+					</div>
+				</div>
+			</div>
+
+			<div class="col-6 mb-2">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Polar Area Chart</h5>
+
+
+						<canvas id="polarAreaChart" style="max-height: 400px;"></canvas>
+
+
+					</div>
+				</div>
+			</div>
+
+			<div class="col-6 mb-2">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Stacked Bar Chart</h5>
+
+
+						<canvas id="stakedBarChart" style="max-height: 400px;"></canvas>
+
+
+					</div>
+				</div>
+			</div>
+
+			<div class="col-6 mb-2">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Bubble Chart</h5>
+
+
+						<canvas id="bubbleChart" style="max-height: 400px;"></canvas>
+
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</section>
 {% endblock %}

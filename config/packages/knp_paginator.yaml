@@ -1,0 +1,34 @@
+# Fichier de configuration KnpPaginatorBundle
+
+knp_paginator:
+  # Nombre de liens affichés dans le menu de pagination
+  page_range: 5
+
+  default_options:
+    # Nom du paramètre de requête pour le numéro de page
+    page_name: page
+
+    # Nom du paramètre de requête pour le champ de tri
+    sort_field_name: sort
+
+    # Nom du paramètre de requête pour la direction de tri
+    sort_direction_name: direction
+
+    # Assure des résultats distincts (utile avec GROUP BY dans les requêtes ORM)
+    distinct: true
+
+    # Nom du paramètre de requête pour le champ de filtrage
+    filter_field_name: filterField
+
+    # Nom du paramètre de requête pour la valeur de filtrage
+    filter_value_name: filterValue
+
+  template:
+    # Modèle Twig pour les contrôles de pagination
+    pagination: "@KnpPaginator/Pagination/twitter_bootstrap_v3_pagination.html.twig"
+
+    # Modèle Twig pour les liens de tri
+    sortable: "@KnpPaginator/Pagination/sortable_link.html.twig"
+
+    # Modèle Twig pour les filtres
+    filtration: "@KnpPaginator/Pagination/filtration.html.twig"

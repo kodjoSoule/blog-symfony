@@ -1,0 +1,175 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row py-4">
+        <div class="col bg-success">
+            <h1 class="text-center">{{ article.title }}</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
+                    <li class="breadcrumb-item"><a href="{{ path('app_articles') }}">Articles</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ article.title }}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col" data-aos="fade-up" data-aos-delay="150">
+            <p class="date">Ecrit le {{ article.createdAt|date("d/m/Y H:i") }}</p>
+            <img src="{{ article.image }}" alt="{{ article.title }}" class="img-fluid mb-4" style="height : 500px"/>
+            <ul class="list-inline">
+                <li class="list-inline-item ms-2">
+                    <span class=" fas fa-user"></span> <a href="#">{{article.getUser()}}</a>
+                </li>
+                <li class="list-inline-item ms-2">
+                    <span class="fas fa-tag"></span> <a href="#">Web Design</a>
+                </li>
+                <li class="list-inline-item ms-2">
+                    <span class="fas fa-comment"></span>
+                    <a href="#">{{comment_service.getTotalCommentCountForArticle(article)}}</a>
+                </li>
+            </ul>
+            <p>{{ article.content }}</p>
+
+            <hr>
+            <div class="card p-4 mb-4">
+                <h2 class="h2 mb-3">Commentaires {{comment_service.getTotalCommentCountForArticle(article)}} <i class="fas fa-comments"></i></h2>
+                {% if article.comments is not empty %}
+                    <ul class="list-unstyled ms-5" data-aos="fade-up" data-aos-delay="300">
+                        {% for comment in article.comments %}
+                            <li class="mb-5" style="display : flex">
+                                <div class="text-center" >
+                                    <img class="img-fluid rounded-3" width="50" src="
+                                    https://svgsilh.com/svg/303444.svg
+                                    " />
+                                </div>
+                                <div class="ms-5 ">
+                                    <p class="font-weight-bold">
+                                        {{ comment.user.getFullname() | capitalize }}
+                                    </p>
+                                    <p class="font-weight-bold">
+                                        {{ comment.createdAt | date("d M y",  null, "fr" ) }}
+                                    </p>
+                                    <p>{{ comment.content }}</p>
+
+                                    <!-- Répondre à un commentaire -->
+                                    <button class="btn btn-sm btn-secondary reply-btn" data-comment-id="{{ comment.id }}">
+                                        Répondre <i class="fas fa-reply"></i>
+                                    </button>
+                                    <div class="reply-form"></div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>Aucun commentaire pour le moment.</p>
+                {% endif %}
+            </div>
+            <!-- Formulaire pour commenter -->
+            {# <form action="{{ path('comment_article', {'id': article.id}) }}" method="POST" class="mt-4">
+                <h3>Laissez un Commentaire<i class="fas fa-comment"></i></h3>
+                <div class="form-group">
+                    <label for="comment">Votre commentaire</label>
+                    <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Poster le commentaire</button>
+            </form>
+            <hr/> #}
+            <div class="card p-4">
+                <form class='form mt-2' method="post">
+                        {{ form(commentForm) }}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+    <script>
+
+        // Gestion de la réponse aux commentaires
+        document.addEventListener("DOMContentLoaded", function () {
+            const replyButtons = document.querySelectorAll(".reply-btn");
+            replyButtons.forEach((button) => {
+                button.addEventListener("click", function () {
+                    const commentId = this.getAttribute("data-comment-id");
+                    const replyForm = document.querySelector(`.reply-form`);
+
+                    const form = document.createElement("form");
+                    const closeForm = function () {
+                        alert('Close');
+                    }
+                    if (!replyForm.classList.contains("active")) {
+                        //alert('form is not active');
+                        form.innerHTML = `
+                        <div class="form-group mb-2">
+                            <label for="reply">Votre réponse</label>
+                            <textarea class="form-control" id="reply" name="reply" rows="2" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-sm btn-primary">Envoyer</button>
+                    `;
+
+                    replyForm.innerHTML = "";
+                    replyForm.appendChild(form);
+                    replyForm.classList.add("active");
+                    }else{
+                        //alert('form is active');
+                        replyForm.innerHTML = "";
+                        replyForm.classList.remove("active");
+                    }
+
+
+                });
+            });
+        });
+    </script>
+{% endblock %}
+{#}
+{% block scripts %}
+<script>
+    // Gestion de la réponse aux commentaires
+    document.addEventListener("DOMContentLoaded", function () {
+        const replyButtons = document.querySelectorAll(".reply-btn");
+
+        replyButtons.forEach((button) => {
+            button.addEventListener("click", function () {
+                const commentId = this.getAttribute("data-comment-id");
+                const replyForm = document.querySelector(`.reply-form[data-comment-id="${commentId}"]`);
+                const form = document.createElement("form");
+
+                if (!replyForm.classList.contains("active")) {
+                    // Afficher le formulaire
+                    form.innerHTML = `
+                        <div class="form-group mb-2">
+                            <label for="reply">Votre réponse</label>
+                            <textarea class="form-control" id="reply" name="reply" rows="2" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-sm btn-primary">Envoyer</button>
+                    `;
+                    replyForm.classList.add("active");
+                } else {
+                    // Cacher le formulaire
+                    form.innerHTML = '';
+                    replyForm.classList.remove("active");
+                }
+
+                replyForm.innerHTML = "";
+                replyForm.appendChild(form);
+            });
+        });
+    });
+</script>
+{% endblock %}
+#}

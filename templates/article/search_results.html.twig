@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<style>
+    {# .custom-pagination .page-item {
+    margin: 0 5px;
+}
+
+.custom-pagination .page-link {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #333;
+}
+
+.custom-pagination .page-item.active .page-link {
+    background-color: #333;
+    color: #fff;
+} #}
+
+.btn-success:hover{
+    color : white ;
+    background-color : blue ;
+    border : none
+}
+
+</style>
+<div class="container-fluid">
+    <div class="row py-2">
+        <div class="col py-2 bg-success d-flex">
+                <span class="h3">Resultat de recherche</span>
+                <a href="{{path('app_home')}}" class=" text-danger ms-auto h3" >Retour </a>
+
+
+        </div>
+
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Recherche d'articles</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="min-height: 500px">
+    <div class="row">
+        <div class="col">
+            <h2>Résultats de la recherche</h2>
+            {% if searchResults is empty %}
+                <p>Aucun résultat trouvé.</p>
+            {% else %}
+                <ul>
+                    {% for result in searchResults %}
+                        <li>{{ result.title }}</li>
+                        <!-- Affichez d'autres informations sur le résultat de la recherche si nécessaire -->
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

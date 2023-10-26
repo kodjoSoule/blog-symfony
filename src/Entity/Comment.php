@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,6 +29,10 @@ class Comment
     #[ORM\JoinColumn(nullable: false)]
     private ?User $User = null;
 
+    public function __construct()
+    {
+        $this->createdAt = new DateTimeImmutable();
+    }
     public function getId(): ?int
     {
         return $this->id;

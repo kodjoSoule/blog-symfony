@@ -11,7 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\RoleField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -21,31 +21,33 @@ class UserCrudController extends AbstractCrudController
     }
     public function configureCrud(Crud $crud): Crud
     {
-        return 
-        $crud
-        
-        ->setPaginatorPageSize(5)
-        ->setEntityLabelInSingular('Utilisateur')
-        ->setEntityLabelInPlural('Utilisateurs')
-        ->setSearchFields(['username', 'firstname', 'lastname', 'email']);
+        return
+            $crud
+
+            ->setPaginatorPageSize(5)
+            ->setEntityLabelInSingular('Utilisateur')
+            ->setEntityLabelInPlural('Utilisateurs')
+            ->setSearchFields(['username', 'firstname', 'lastname', 'email']);
     }
 
-    
-    public function configureFields(string $pageName): iterable
+
+    public function configureFields2(string $pageName): iterable
     {
         return [
             IdField::new('id', 'ID')
-            ->hideOnForm()
-            ->setFormTypeOption('disabled', 'disabled'),
-            TextField::new('Email', 'Email')
-            ->setFormTypeOption('disabled', 'disabled'),
+                ->hideOnForm()
+                ->setFormTypeOption('disabled', 'disabled'),
+            TextField::new('Email', 'Email'),
+            //->setFormTypeOption('disabled', 'disabled'),
             TextField::new('username', 'Nom Utilisateur'),
             TextField::new('firstname', 'Prenom'),
             TextField::new('lastname', 'Nom'),
+            TextEditorField::new('apropos', 'A Propos')
+                ->setNumOfRows(30)
+                ->setRequired(true),
             ChoiceField::new('roles', 'Role(s)')
-            ->setChoices(['User' => 'ROLE_USER', 'Admin' => 'ROLE_ADMIN'])
-            ->allowMultipleChoices(),
+                ->setChoices(['User' => 'ROLE_USER', 'Admin' => 'ROLE_ADMIN'])
+                ->allowMultipleChoices(),
         ];
     }
-    
 }

@@ -5,13 +5,15 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'], message: 'Il existe déjà un compte avec cette email')]
+#[UniqueEntity(fields: ['username'], message: 'Ce nom d\'utilisateur est déjà utilisé')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -35,7 +37,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $isVerified = false;
 
     #[ORM\Column(length: 255)]
-    private ?string $Username = null;
+    private ?string $username = null;
 
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Article::class)]
     private Collection $articles;
@@ -48,6 +50,40 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $telephone = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $aPropos = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $instagram = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $job = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $country = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $linkedin = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $facebook = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $compagny = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $address = null;
+
+    #[ORM\Column(type: Types::BLOB, nullable: true)]
+    private $image = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $twitter = null;
+
 
     public function __construct()
     {
@@ -139,12 +175,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getUsername(): ?string
     {
-        return $this->Username;
+        return $this->username;
     }
 
-    public function setUsername(string $Username): static
+    public function setUsername(string $username): static
     {
-        $this->Username = $Username;
+        $this->username = $username;
 
         return $this;
     }
@@ -229,6 +265,155 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastname(string $lastname): static
     {
         $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(?string $telephone): static
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    public function getAPropos(): ?string
+    {
+        return $this->aPropos;
+    }
+
+    public function setAPropos(string $aPropos): static
+    {
+        $this->aPropos = $aPropos;
+
+        return $this;
+    }
+
+    public function getinstagram(): ?string
+    {
+        return $this->instagram;
+    }
+
+    public function setinstagram(?string $instagram): static
+    {
+        $this->instagram = $instagram;
+
+        return $this;
+    }
+    public function __toString(): string
+    {
+        return $this->getusername(); // Vous pouvez changer cela en retourner n'importe quel champ que vous souhaitez afficher dans la liste des utilisateurs.
+    }
+
+    public function getFullname(): ?string
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
+    public function setFullname(string $fullname)
+    {
+        $names = explode(' ', $fullname, 2); // Divise le nom complet en deux parties en utilisant l'espace comme séparateur
+
+        $this->firstname = $names[0] ?? ''; // Affecte la première partie à la propriété "firstname"
+        $this->lastname = $names[1] ?? ''; // Affecte la deuxième partie à la propriété "lastname"
+    }
+
+
+    public function getJob(): ?string
+    {
+        return $this->job;
+    }
+
+    public function setJob(?string $job): static
+    {
+        $this->job = $job;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?string $country): static
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    public function getLinkedin(): ?string
+    {
+        return $this->linkedin;
+    }
+
+    public function setLinkedin(?string $linkedin): static
+    {
+        $this->linkedin = $linkedin;
+
+        return $this;
+    }
+
+    public function getFacebook(): ?string
+    {
+        return $this->facebook;
+    }
+
+    public function setFacebook(?string $facebook): static
+    {
+        $this->facebook = $facebook;
+
+        return $this;
+    }
+
+    public function getCompagny(): ?string
+    {
+        return $this->compagny;
+    }
+
+    public function setCompagny(?string $compagny): static
+    {
+        $this->compagny = $compagny;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?string $address): static
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image): static
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getTwitter(): ?string
+    {
+        return $this->twitter;
+    }
+
+    public function setTwitter(string $twitter): static
+    {
+        $this->twitter = $twitter;
 
         return $this;
     }
