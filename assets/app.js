@@ -13,6 +13,11 @@ import "font-awesome/css/font-awesome.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+//swiper slider
+import Swiper from "swiper";
+// import Swiper styles
+import "swiper/css";
+
 document.addEventListener("DOMContentLoaded", function () {
 	AOS.init({
 		// Exemple d'options :
@@ -20,6 +25,8 @@ document.addEventListener("DOMContentLoaded", function () {
 		duration: 800, // Durée de l'animation en millisecondes
 		easing: "ease-in-out", // Fonction d'accélération (par exemple, 'ease', 'linear', 'ease-in', 'ease-out', 'ease-in-out')
 		delay: 0, // Délai (en millisecondes) avant le début de l'animation
+		once: true, //
+		mirror: false,
 	});
 
 	// import GLightbox from 'glightbox';
@@ -109,4 +116,49 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 
 	// <!-- End Line CHart -->
+
+	/**
+	 * Hero Slider
+	 */
+	var swiper = new Swiper(".sliderFeaturedPosts", {
+		spaceBetween: 0,
+		speed: 500,
+		centeredSlides: true,
+		loop: true,
+		slideToClickedSlide: true,
+		autoplay: {
+			delay: 3000,
+			disableOnInteraction: false,
+		},
+		pagination: {
+			el: ".swiper-pagination",
+			clickable: true,
+		},
+		navigation: {
+			nextEl: ".custom-swiper-button-next",
+			prevEl: ".custom-swiper-button-prev",
+		},
+	});
+	// counter
+	const counters = document.querySelectorAll(".counter");
+
+	counters.forEach((counter) => {
+		counter.innerText = "0";
+
+		const updateCounter = () => {
+			const target = +counter.getAttribute("data-target");
+			const c = +counter.innerText;
+
+			const increment = target / 200;
+
+			if (c < target) {
+				counter.innerText = `${Math.ceil(c + increment)}`;
+				setTimeout(updateCounter, 1);
+			} else {
+				counter.innerText = target;
+			}
+		};
+
+		updateCounter();
+	});
 });

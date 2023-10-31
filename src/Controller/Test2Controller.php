@@ -78,7 +78,7 @@ class Test2Controller extends AbstractController
     //     ]);
     // }
     //22
-    // #[Route('/new', name: 'app_test2_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'app_test2_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, UploaderHelper $uploaderHelper): Response
     {
         $test2 = new Test2();

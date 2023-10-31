@@ -8,4 +8,94 @@ body {
     object-fit: cover;
 
 }
+/* home */
+#dernierArticle.card img {
+    width: 100%;
+    height: 15rem;
+    object-fit: cover;
+}
+/* replay */
+#replay {
+    transition: all 0.3s;
+}
 
+#replay span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.3s;
+}
+
+#replay span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+#replay:hover span {
+    padding-right: 25px;
+}
+#banner h1, .fw-bold{
+    color : yellow;
+}
+#replay:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+/* swiper */
+
+/* Slider container */
+.sliderFeaturedPosts {
+    width: 100%;
+    max-width: 800px; /* Définissez la largeur maximale du slider */
+    margin: 0 auto;
+}
+
+/* Diapositives */
+.swiper-slide {
+    background-size: cover;
+    background-position: center;
+    height: 300px; /* Définissez la hauteur de chaque diapositive */
+}
+
+/* Boutons de navigation */
+.swiper-button-next,
+.swiper-button-prev {
+    font-size: 24px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.swiper-button-prev {
+    left: 10px;
+}
+
+.swiper-button-next {
+    right: 10px;
+}
+
+
+/* Counter footer */
+
+.counter-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: 30px 50px;
+  }
+
+  .counter {
+    font-size: 60px;
+    margin-top: 10px;
+  }

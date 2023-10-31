@@ -1,14 +1,23 @@
 {% extends 'base.html.twig' %}
-{# {% block header %}
-    {% include 'partials/header.html.twig' with {'cards':'active'} %}
-{% endblock %} #}
-
+{% block header %}
+	{% include 'test/header.html.twig' with {'cards':'active'} %}
+{% endblock %}
 {% block body %}
 <script></script>
 <div class="container">
 	<section class="section">
-		<div class="row">
+		<div class="row mt-5">
 			<div class="col-6 mb-2">
+				<figure class="text-overlay">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Akatsuki_clouds.svg/640px-Akatsuki_clouds.svg.png" alt=""/>
+					<figcaption id="fc">
+						Food Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto recusandae, dolores, vitae distinctio esse laudantium eum, nobis molestias omnis minima alias ducimus repellendus ratione quod assumenda dicta voluptatibus dignissimos aliquid.
+					</figcaption>
+				</fiqure>
+			</div>
+		</div>
+		<div class="row">
+			<div class=" col-6 mb-2">
 				<div class="card">
 					<div class="card-body">
 						<h5 class="card-title">Line Chart- HK

@@ -1,0 +1,43 @@
+<header style=" margin-bottom: 70px;" id="app_header">
+
+	<nav class="navbar navbar-dark bg-primary fixed-top  navbar-expand-lg  pt-3" style="border:red">
+		<div class="container-fluid">
+
+			<a class="navbar-brand" href="{{ path('app_home') }}" id="test">HK'S BLOG</a>
+
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+
+			<div class="collapse navbar-collapse" id="navbarsExample03">
+				<ul class="navbar-nav me-auto mb-2 mb-sm-0" id="app_nav">
+					<li class="nav-item">
+						<a class="nav-link {{home_page | default('') }}" href="{{ path('app_home') }}">Accueil</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {{article_page | default('') }}" href="{{path('app_test')}}">Test
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {{article_page | default('') }}" href="">Chart</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {{article_page | default('') }}" href="{{path('app_counter')}}">Counter</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {{category_page | default('') }}" href="{{path('app_test2')}}">Test-Vich Uploader</a>
+					</li>
+					{% if is_granted('ROLE_ADMIN') %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('admin') }}">Administration</a>
+						</li>
+					{% endif %}
+
+				</ul>
+			</li>
+		</ul>
+
+	</div>
+
+</div></div></nav></header>

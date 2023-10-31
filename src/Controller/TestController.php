@@ -24,13 +24,17 @@ class TestController extends AbstractController
 
         return $this->render('test/index.html.twig', [
             'controller_name' => 'TestController',
-
         ]);
     }
     #[Route('/chart', name: 'app_chart')]
     public function chartjs(): Response
     {
-        return $this->render('test/testChart.html.twig', []);
+        return $this->render('test/chart.html.twig', []);
+    }
+    #[Route('/counter', name: 'app_counter')]
+    public function counter(): Response
+    {
+        return $this->render('test/counter.html.twig', []);
     }
 
     #[Route('/test2', name: 'app_test2')]
