@@ -8,8 +8,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use DateTimeImmutable;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'Il existe déjà un compte avec cette email')]
@@ -87,21 +90,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $imageName = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $imageFile = null;
+    // #[Vich\UploadableField(mapping: 'test_mapping', fileNameProperty: 'imageName')]
+    // private ?File $imageFile = null;
 
 
     public function __construct()
     {
         $this->articles = new ArrayCollection();
         $this->comments = new ArrayCollection();
-        $this->createdA
     }
 
     public function getId(): ?int
@@ -467,15 +469,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getImageFile(): ?string
-    {
-        return $this->imageFile;
-    }
+    // public function getImageFile(): ?string
+    // {
+    //     return $this->imageFile;
+    // }
 
-    public function setImageFile(string $imageFile): static
-    {
-        $this->imageFile = $imageFile;
+    // public function setImageFile(string $imageFile): static
+    // {
+    //     $this->imageFile = $imageFile;
+    //     if (null !== $imageFile) {
+    //         $this->updatedAt = new \DateTimeImmutable();
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }

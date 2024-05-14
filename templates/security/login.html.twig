@@ -57,6 +57,17 @@
 	</style>
 	<div class="container-fluid">
 		<div class="row">
+			<div class="col image-container">
+				<div>
+					<h2>Bienvenue dans le blog HK
+					</h2>
+					<span>
+						Toutes les informations high tech
+					</span>
+
+				</div>
+
+			</div>
 			<div class="col-5 form-container">
 				<div class="card">
 					<div class="card-body">
@@ -89,10 +100,10 @@
 
 							<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 							<div class="form-row mb-3 d-flex flex-wrap-reverse justify-content-between">
-								<a class="text-secondary" href="{{path('app_home')}}">Mot de passe oublié ?</a>
 								<button class="btn btn-md btn-primary " type="submit">
 									Connexion
 								</button>
+								<a class="text-secondary" href="{{path('app_home')}}">Mot de passe oublié ?</a>
 							</div>
 
 						</form>
@@ -111,17 +122,7 @@
 				{#  #}
 
 			</div>
-			<div class="col image-container">
-				<div>
-					<h2>Bienvenue dans le blog HK
-					</h2>
-					<span>
-						Toutes les informations high tech
-					</span>
 
-				</div>
-
-			</div>
 		</div>
 
 	</div>

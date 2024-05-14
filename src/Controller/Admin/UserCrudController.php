@@ -31,14 +31,15 @@ class UserCrudController extends AbstractCrudController
     }
 
 
-    public function configureFields2(string $pageName): iterable
+    public function configureFields(string $pageName): iterable
     {
         return [
             IdField::new('id', 'ID')
                 ->hideOnForm()
                 ->setFormTypeOption('disabled', 'disabled'),
             TextField::new('Email', 'Email'),
-            //->setFormTypeOption('disabled', 'disabled'),
+            // ->setFormTypeOption('disabled', 'disabled'),
+            TextField::new('password', 'password'),
             TextField::new('username', 'Nom Utilisateur'),
             TextField::new('firstname', 'Prenom'),
             TextField::new('lastname', 'Nom'),
@@ -46,7 +47,7 @@ class UserCrudController extends AbstractCrudController
                 ->setNumOfRows(30)
                 ->setRequired(true),
             ChoiceField::new('roles', 'Role(s)')
-                ->setChoices(['User' => 'ROLE_USER', 'Admin' => 'ROLE_ADMIN'])
+                ->setChoices(['Utilisateur' => 'ROLE_USER', 'Administrateur' => 'ROLE_ADMIN'])
                 ->allowMultipleChoices(),
         ];
     }

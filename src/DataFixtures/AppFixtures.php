@@ -32,7 +32,7 @@ class AppFixtures extends Fixture
         $user1->setFirstname($faker->firstName());
         $user1->setLastname($faker->lastName());
         $user1->setUsername($faker->userName());
-        $password = $this->passwordHasher->hashPassword($user1, 'password');
+        $password = $this->passwordHasher->hashPassword($user1, 'user1@example.com');
         $user1->setRoles(['ROLE_ADMIN']);
         $user1->setPassword($password);
         $user1->setPassword($faker->password());
@@ -55,6 +55,19 @@ class AppFixtures extends Fixture
             $manager->persist($user);
             $users[] = $user;
         }
+        //un utilisateur admin par defaut
+        $admin = new User();
+        $admin->setEmail('admin@admin.com');
+        $admin->setFirstname('Admin');
+        $admin->setLastname('Admin');
+        $admin->setUsername('admin');
+        $admin->setRoles(['ROLE_ADMIN']);
+        $password = $this->passwordHasher->hashPassword($admin, 'admin');
+        $admin->setPassword($password);
+        $admin->setPassword($faker->password());
+        $admin->setAPropos($faker->word());
+        $admin->setTelephone($faker->phoneNumber());
+        $users[] = $admin;
 
         // ...
 
@@ -68,12 +81,11 @@ class AppFixtures extends Fixture
             $categories[] = $category;
         }
         $articles = [];
-        for ($i = 0; $i < 15; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             $article = new Article();
             $article->setTitle($faker->word);
             $article->setContent($faker->word);
-
-            $article->setImage($faker->imageUrl());
+            $article->setImage("https://i.dell.com/sites/csimages/App-Merchandizing_Images/all/laptop-category-latitude-14-9440-lf-rf-800x620.png");
             $article->setCategory($categories[$faker->numberBetween(0, 9)]);
             $article->setUser($users[$faker->numberBetween(0, 9)]);
             $manager->persist($article);

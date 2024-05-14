@@ -13,6 +13,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class UserType extends AbstractType
 {
@@ -23,7 +24,11 @@ class UserType extends AbstractType
             // ->add('roles')
             // ->add('password')
             // ->add('isVerified')
-
+            //Cacher par defaut les champs
+            ->add('imageFile', VichFileType::class, [
+                'label' => 'Image',
+                'required' => false,
+            ])
             ->add('firstname', TextType::class, [
                 'label' => false,
                 'constraints' => [

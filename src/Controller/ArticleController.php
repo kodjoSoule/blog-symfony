@@ -100,6 +100,7 @@ class ArticleController extends AbstractController
         $commentForm->handleRequest($request);
 
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+
             //$entityManager = $this->getDoctrine()->getManager();
             $entityManager = $manager->getManager();
             $entityManager->persist($comment);
